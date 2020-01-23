@@ -1,0 +1,43 @@
+package edu.duke.ece651.classbuilder;
+
+import java.util.ArrayList;
+
+import org.json.JSONObject;
+
+public class ClassBuilder {
+  private int classNum;
+  private ArrayList<JSONObject> classObjs;
+  
+  public ClassBuilder( String jsonStr ) throws JSONException {
+    JSONObject jsonObj = new JSONObject(jsonStr);
+    JSONArray classes = jsonObj.getJSONArray("classes");
+    this.classNum = classes.length();
+    this.classObjs = new ArrayList<JSONObject>();
+    for ( int i = 0; i < classes.length(); i++ ) {
+      JSONObject c = (JSONObject)classes.get(i);
+    }
+  }
+
+  int getClassNum() {
+    return this.classNum;
+  }
+
+  String getName() {
+    return this.classArr.get(0);
+  }
+  /*
+  public ClassBuilder( InputStream input ) {
+  }
+  
+  public Collection<String> getClassNames() {
+  }
+
+  public String getSourceCode( String className) {
+  }
+
+  public void createAllClasses ( String basePath) {
+  }
+  */
+
+  
+}

@@ -1,0 +1,25 @@
+package edu.duke.ece651.classbuilder;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.junit.jupiter.api.Test;
+
+public class ClassBuiilderTest {
+  @Test
+  public void test_() {
+    JSONObject test = new JSONObject();
+    JSONObject c = new JSONObject();
+    c.put("name", "first");
+    JSONArray classes = new JSONArray();
+    classes.put(c);
+    test.put("classes", classes);
+ 
+    String jsonStr = test.toString();
+    ClassBuilder x = new ClassBuilder(jsonStr);
+    assertEquals(1, x.getClassNames().size());
+    assertEquals(1, x.getClassNum());
+  }
+
+}
