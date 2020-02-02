@@ -1,9 +1,10 @@
 package edu.duke.ece651.classbuilder;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 import org.junit.jupiter.api.Test;
 
 public class ClassBuiilderTest {
@@ -28,9 +29,9 @@ public class ClassBuiilderTest {
     csobj.put("classes", classes);
 
   }
-  */  
+    
   @Test
-  public void test_getSourceCode() { 
+  public void test_inputString() { 
     //String jsonStr = csobj.toString();
     //System.out.print(jsonStr);
     String jsonStr = "{\"classes\":[{\"name\":\"first_class\",\"fields\":[{\"name\":\"first_field\",\"type\":\"String\"}]}]}";
@@ -38,6 +39,28 @@ public class ClassBuiilderTest {
     assertEquals (1, cb.getClassNames().size() );
     assertEquals(true,cb.getClassNames().contains("first_class"));
     assertEquals("public class first_class {\nString first_field;\n}", cb.getSourceCode("first_class"));
+  }
+  */
+  @Test
+  public void test_inputStream() {
+    //File file = new File("simple.json");
+    ClassLoader classLoader = getClass().getClassLoader();
+    try {
+      InputStream in = classLoader.getResourceAsStream("array.json");
+      ClassBuilder cb = new ClassBuilder(in);
+      assertEquals (1, cb.getClassNames().size() );
+      assertEquals(true,cb.getClassNames().contains("matrix3d"));
+      //assertEquals(true,cb.getClassNames().contains(Courses"));
+      //assertEquals(true,cb.getClassNames().contains(Courses"));
+      //assertEquals(true,cb.getClassNames().contains(Courses"));
+      System.out.println(cb.getSourceCode("TEST"));
+    }
+    catch ( FileNotFoundException e) {
+      System.out.println("file not find");
+    }
+    catch ( Exception e ) {
+      System.out.println("other exception");
+    }
   }
 
 }
